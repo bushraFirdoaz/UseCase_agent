@@ -1,7 +1,7 @@
 from src.knowledge.embeddings import create_embedding
 from src.knowledge.vector_store import search_documents
 import ollama
-
+from src.bedrock_model import ask_model
 
 MODEL_NAME = "llama3.2"
 
@@ -44,17 +44,7 @@ Instructions:
   "I couldn't find this information in the provided documents."
 """
 
-    response = ollama.chat(
-        model=MODEL_NAME,
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-    )
-
-    return response["message"]["content"]
+    return ask_model(prompt)
 
 
 if __name__ == "__main__":
